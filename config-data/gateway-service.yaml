@@ -26,19 +26,19 @@ spring:
             allowed-headers: "*"
             allow-credentials: true
       routes:
-        -id: grasas-y-solidos-service
+        - id: grasas-y-solidos-service
         uri: lb://grasas-y-solidos-service
         predicates:
           - Path=/grasas-y-solidos/**
-        -id: acopio-service
+        - id: acopio-service
         uri: lb://acopio-service
         predicates:
           - Path=/acopio/**
-        -id: proveedor-service
+        - id: proveedor-service
         uri: lb://proveedor-service
         predicates:
           - Path=/proveedor/**
-        -id: reporte-service
+        - id: reporte-service
         uri: lb://reporte-service
         predicates:
           - Path=/reporte/**
