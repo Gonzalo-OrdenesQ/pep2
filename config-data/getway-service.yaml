@@ -1,0 +1,43 @@
+server:
+  port: 8080
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://eureka-service:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allwed-origin-patterns: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+      routes:
+        - id: proveedor-service
+          uri: lb://proveedor-service
+          predicates:
+            - Path=/proveedor/**
+        - id: reporte-service
+          uri: lb://reporte-service
+          predicates:
+            - Path=/reporte/**
+        - id: acopio-service
+          uri: lb://acopi-service
+          predicates:
+            - Path=/acopio/**
+        - id: grasas-y-solidos-service
+          uri: lb://grasas-y-solidos-service
+          predicates:
+            - Path=/grasas-y-solidos/**
